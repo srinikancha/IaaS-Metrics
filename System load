@@ -1,5 +1,7 @@
 #Below are the fields from [[system]] plugin metrics
 
+Fields
+======
 load1
 load15
 load5
@@ -7,3 +9,13 @@ n_cpus
 n_users
 uptime
 uptime_format
+
+
+
+load1 : system load avg over the last 1 minutes
+load5 : system load avg over the last 5 minutes
+load15 : system load avg over the last 15 minutes
+n_cpus : numbre of CPU's configured
+n_users : number of users logged in
+uptime : uptime in integer and seconds (eg : 771222)
+uptime_format : uptime in the string format (eg: 8 days, 22:13 )

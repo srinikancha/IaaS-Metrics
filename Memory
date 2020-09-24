@@ -30,7 +30,7 @@ swap_cached
 swap_free 
 swap_total
 total 
-used 
+used
 used_percent
 vmalloc_chunk 
 vmalloc_total 

@@ -1,0 +1,9 @@
+#Below are the fields from [[system]] plugin metrics
+
+load1
+load15
+load5
+n_cpus
+n_users
+uptime
+uptime_format

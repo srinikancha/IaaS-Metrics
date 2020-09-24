@@ -1,39 +1,114 @@
 #Fileds in the mem input plugin
 
 fields:
-active (integer, Darwin, FreeBSD, Linux, OpenBSD)
-available (integer)
-available_percent (float)
-buffered (integer, FreeBSD, Linux)
-cached (integer, FreeBSD, Linux, OpenBSD)
-commit_limit (integer, Linux)
-committed_as (integer, Linux)
-dirty (integer, Linux)
-free (integer, Darwin, FreeBSD, Linux, OpenBSD)
-high_free (integer, Linux)
-high_total (integer, Linux)
-huge_pages_free (integer, Linux)
-huge_page_size (integer, Linux)
-huge_pages_total (integer, Linux)
-inactive (integer, Darwin, FreeBSD, Linux, OpenBSD)
-laundry (integer, FreeBSD)
-low_free (integer, Linux)
-low_total (integer, Linux)
-mapped (integer, Linux)
-page_tables (integer, Linux)
-shared (integer, Linux)
-slab (integer, Linux)
-sreclaimable (integer, Linux)
-sunreclaim (integer, Linux)
-swap_cached (integer, Linux)
-swap_free (integer, Linux)
-swap_total (integer, Linux)
-total (integer)
-used (integer)
-used_percent (float)
-vmalloc_chunk (integer, Linux)
-vmalloc_total (integer, Linux)
-vmalloc_used (integer, Linux)
-wired (integer, Darwin, FreeBSD, OpenBSD)
-write_back (integer, Linux)
-write_back_tmp (integer, Linux)
+=========
+active 
+available
+available_percent
+buffered 
+cached 
+commit_limit
+committed_as
+dirty 
+free 
+high_free
+high_total 
+huge_pages_free
+huge_page_size 
+huge_pages_total 
+inactive 
+laundry 
+low_free
+low_total
+mapped 
+page_tables
+shared 
+slab 
+sreclaimable
+sunreclaim 
+swap_cached 
+swap_free 
+swap_total
+total 
+used 
+used_percent
+vmalloc_chunk 
+vmalloc_total 
+vmalloc_used 
+wired 
+write_back
+write_back_tmp
+
+
+
+
+
+active : Memory used recently. It’s not reclaimed unless absolutely necessary
+
+available : Available memory is the amount of memory which is available for allocation to a new process or to existing processes or for a new workload, without pushing the system into swap, can be estimated from MemFree,Active(file), Inactive(file), and SReclaimable, and subtract the low watermarks from /proc/zoneinfo.
+
+available_percent : Available memory in percent 
+
+buffered : The amount of memory used as buffers, This can be released quickly by the kernel if required ( For example if a file of 2GB in size if we try to read the 2GB load in to the cache and meta data information load in to the buffer)
+
+cached : Amount of memory used for cache, This can be released quickly by the kernel if required.
+
+commit_limit : Based on the overcommit ratio(vm.overcommit_ratio) this is the total amount memory currently available to be allocated on the system  commit limit calculated as  (vm.overcommit_ratio * Physical RAM)+ Swap 
+
+committed_as : The amount of memory presently allocated on the VM, The commited memory is a sum of all the memory which has been allocated by processes even if it has not been "used" by then as of yet
+
+dirty : Amount of memory waiting to be written back to the disk
+
+free : The amount of unused memory
+
+high_free : Amount of free HighMem wich we can see from /proc/zoneinfo
+
+high_total : Amount of total HighMem wich we can see from /proc/zoneinfo
+ 
+huge_pages_free : Number of unallocated huge pages in the pool
+
+huge_page_size : Size of huge pages
+
+huge_pages_total : Huge page pool size
+
+inactive : Pagecache memory that can be reclaimed without huge performance impact
+ 
+laundry : Memory in process of flushing the modifications to the disk 
+
+low_free : Amount of free LowMem from /proc/zoneinfo
+
+low_total : Amount of total LowMem from /proc/zoneinfo
+
+page_tables : Page-table is a data structure that helps a hardware circuit call the MMU(Memeory management Unit) to translate virtual address to physical address 
+
+shared : Amount of memory used by the tmpfs file systems 
+
+slab  : In-kernel data structures cache. pages used by the kernel memory pool
+
+sreclaimable : Amount of Slab memory that might be reclaimed, such as caches
+
+sunreclaim : Amount of Slab memory that can’t be reclaimed. 
+
+swap_cached : Memory that was swapped out and back in, and a copy remains in the swap space.
+
+swap_free : Amount of swap space that’s currently unused.
+
+swap_total : Total amount of swap space available.
+
+total : The total amount of physical RAM on the VM
+
+used : The sum of Free+Buffers+Cache subtracted from the total amount.
+
+used_percent : used memory in percentage
+
+vmalloc_chunk : Largest contiguous block of free vmalloc area
+
+vmalloc_total : Total size of the vmalloc memory area.
+
+vmalloc_used : Amount of vmalloc area used. Since Linux 4.4, this field is no longer calculated, it’s hard-coded.
+
+wired : Memory in use by the kernel, which includes the networking stack 
+
+write_back : Memory actively being written back to the disk
+
+write_back_tmp : Memory used by Filesystem in Userspace (FUSE) for temporary write-back buffers.

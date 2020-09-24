@@ -29,15 +29,15 @@ usage_guest_nice
 
 fields:
 ======
-time_user : The number of times CPU utilization that occurred while executing at the user level (application).
+time_user : CPU utilization time that occurred while executing at the user level (application).
 
-time_system : The number of times CPU utilization that occurred while executing at the system level (kernel). 
+time_system : CPU utilization time that occurred while executing at the system level (kernel). 
 
 time_idle : The number of time that the CPU or CPUs were idle and the system did not have an outstanding disk I/O request. 
 
 time_active: The number of times TCP connections have made a direct transition to the SYN-SENT state from the CLOSED state per second [tcpActiveOpens].
 
-time_nice : The number of times CPU utilization that occurred while executing at the user level with nice priority
+time_nice : CPU utilization time that occurred while executing at the user level with nice priority
 
 time_iowait : The number of times that the CPU or CPUs were idle during which the system had an outstanding disk I/O request.
 

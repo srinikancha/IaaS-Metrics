@@ -1,0 +1,17 @@
+Below are the feilds under [[netstat]] plugin
+
+fields
+=====
+tcp_close
+tcp_close_wait
+tcp_closing
+tcp_established
+tcp_fin_wait1
+tcp_fin_wait2
+tcp_last_ack
+tcp_listen
+tcp_none
+tcp_syn_recv
+tcp_syn_sent
+tcp_time_wait
+udp_socket   

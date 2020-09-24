@@ -1,5 +1,7 @@
 Below are the fields under [[net]] input plugin
 
+Fields
+======
 bytes_recv
 bytes_sent
 drop_in
@@ -8,4 +10,23 @@ err_in
 err_out
 packets_recv
 packets_sent
+
+
+bytes_sent : The total number of bytes sent by the interface
+
+bytes_recv : The total number of bytes received by the interface
+
+drop_in : The total number of received packets dropped by the interface
+
+drop_out : The total number of transmitted packets dropped by the interface
+
+err_in : The total number of receive errors detected by the interface
+
+err_out : The total number of transmit errors detected by the interface
+
+packets_sent : The total number of packets sent by the interface
+
+packets_recv : The total number of packets received by the interface
+
+
 

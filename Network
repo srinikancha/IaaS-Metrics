@@ -27,6 +27,3 @@ err_out : The total number of transmit errors detected by the interface
 packets_sent : The total number of packets sent by the interface
 
 packets_recv : The total number of packets received by the interface
-
-
-

@@ -1,10 +1,21 @@
-Metrics under disk input plugin
+Metrics under [[disk]] input plugin
 
 fields:
-free (integer, bytes)
-total (integer, bytes)
-used (integer, bytes)
-used_percent (float, percent)
-inodes_free (integer, files)
-inodes_total (integer, files)
-inodes_used (integer, files)
+====
+free 
+total 
+used 
+used_percent
+inodes_free 
+inodes_total 
+inodes_used 
+
+
+
+free :  Amount of disk space that is free on file systems
+total : Total amount of disk space given to the file system
+used : Used amount of disk space on the file systems
+used_percent : Usage in percent 
+inodes_free : Number of inodes free
+inodes_total : Total number of available inodes
+inodes_used : Total number of inodes used

@@ -37,4 +37,3 @@ vmalloc_used (integer, Linux)
 wired (integer, Darwin, FreeBSD, OpenBSD)
 write_back (integer, Linux)
 write_back_tmp (integer, Linux)
-

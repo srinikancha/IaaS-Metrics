@@ -1,6 +1,6 @@
-Below are the metrics under the cpu input plugin
+Below are the metrics under the ```[[cpu]]``` input plugin
 
-fields:
+```fields:```
 time_user (float)
 time_system (float)
 time_idle (float)

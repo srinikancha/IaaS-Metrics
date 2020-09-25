@@ -16,22 +16,6 @@ merged_writes
 
 
 
-fields:
-======
-reads 
-writes 
-read_bytes 
-write_bytes
-read_time 
-write_time 
-io_time 
-weighted_io_time 
-iops_in_progress 
-merged_reads 
-merged_writes 
-
-
-
 reads/writes :These values increment when an I/O request completes
 
 read_bytes/write_bytes : These values count the number of bytes read from or written to this block device
@@ -46,3 +30,38 @@ iops_in_progress : The number of I/O requests that have been issued to the devic
 
 merged_reads/merged_writes :Reads and writes which are adjacent to each other may be merged for efficiency. Thus two 4K reads may become one 8K read before it is ultimately handed to the disk, and so it will be counted (and queued) as only one I/O. These fields lets you know how often this was done.
 
+
+config.toml looks like below
+======
+[agent]
+[[processors.override]]
+    name_prefix = "srini."
+[[inputs.diskio]]
+    fieldpass = ["read_bytes", "write_bytes", "io_time", "iops_in_progress"]
+    taginclude = ["name"]
+[[outputs.socket_writer]]
+    address = "tcp://riemannIP:port"
+    data_format = "influx"
+[[outputs.file]]
+     files = ["stdout"]
+     data_format = "influx"
+
+Desired Output
+====
+> srini.diskio,name=nvme1n1p1 io_time=2904i,iops_in_progress=0i,read_bytes=311399424i,write_bytes=3678892032i 1601014662000000000
+> srini.diskio,name=nvme3n1 io_time=3408i,iops_in_progress=0i,read_bytes=97384448i,write_bytes=876453888i 1601014662000000000
+> srini.diskio,name=nvme3n1p1 io_time=3388i,iops_in_progress=0i,read_bytes=81184768i,write_bytes=876347392i 1601014662000000000
+> srini.diskio,name=nvme0n1 io_time=2224i,iops_in_progress=0i,read_bytes=134276096i,write_bytes=2674335744i 1601014662000000000
+> srini.diskio,name=nvme0n1p1 io_time=316i,iops_in_progress=0i,read_bytes=7254016i,write_bytes=86695936i 1601014662000000000
+> srini.diskio,name=nvme0n1p2 io_time=1848i,iops_in_progress=0i,read_bytes=90059776i,write_bytes=2587414528i 1601014662000000000
+> srini.diskio,name=nvme1n1 io_time=2904i,iops_in_progress=0i,read_bytes=312624128i,write_bytes=3678896128i 1601014662000000000          
+
+Default Output
+====
+> srini.diskio,host=777f7316-366e-469f-b064-3351c9935fdf,name=nvme1n1p1 io_time=2904i,iops_in_progress=0i,merged_reads=0i,merged_writes=452335i,read_bytes=311399424i,read_time=19860i,reads=13142i,weighted_io_time=15468i,write_bytes=3679145984i,write_time=66584i,writes=403402i 1601014721000000000
+> srini.diskio,host=777f7316-366e-469f-b064-3351c9935fdf,name=nvme3n1 io_time=3408i,iops_in_progress=0i,merged_reads=0i,merged_writes=65961i,read_bytes=97384448i,read_time=1748i,reads=3159i,weighted_io_time=22348i,write_bytes=876650496i,write_time=37736i,writes=49874i 1601014721000000000
+> srini.diskio,host=777f7316-366e-469f-b064-3351c9935fdf,name=nvme3n1p1 io_time=3388i,iops_in_progress=0i,merged_reads=0i,merged_writes=65941i,read_bytes=81184768i,read_time=1584i,reads=2610i,weighted_io_time=22308i,write_bytes=876544000i,write_time=37736i,writes=49868i 1601014721000000000
+> srini.diskio,host=777f7316-366e-469f-b064-3351c9935fdf,name=nvme0n1 io_time=2224i,iops_in_progress=0i,merged_reads=136i,merged_writes=248724i,read_bytes=134276096i,read_time=1336i,reads=2932i,weighted_io_time=12944i,write_bytes=2674536448i,write_time=24960i,writes=297488i 1601014721000000000
+> srini.diskio,host=777f7316-366e-469f-b064-3351c9935fdf,name=nvme0n1p1 io_time=316i,iops_in_progress=0i,merged_reads=136i,merged_writes=19598i,read_bytes=7254016i,read_time=64i,reads=176i,weighted_io_time=348i,write_bytes=86695936i,write_time=1904i,writes=1568i 1601014721000000000
+> srini.diskio,host=777f7316-366e-469f-b064-3351c9935fdf,name=nvme0n1p2 io_time=1848i,iops_in_progress=0i,merged_reads=0i,merged_writes=229086i,read_bytes=90059776i,read_time=976i,reads=1599i,weighted_io_time=12464i,write_bytes=2587615232i,write_time=23040i,writes=295905i 1601014721000000000
+> srini.diskio,host=777f7316-366e-469f-b064-3351c9935fdf,name=nvme1n1 io_time=2904i,iops_in_progress=0i,merged_reads=0i,merged_writes=452335i,read_bytes=312624128i,read_time=19924i,reads=13231i,weighted_io_time=15472i,write_bytes=3679150080i,write_time=66584i,writes=403403i 1601014721000000000         

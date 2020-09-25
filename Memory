@@ -109,3 +109,30 @@ vmalloc_used : Amount of vmalloc area used. Since Linux 4.4, this field is no lo
 write_back : Memory actively being written back to the disk
 
 write_back_tmp : Memory used by Filesystem in Userspace (FUSE) for temporary write-back buffers.
+
+
+config.toml file look like below
+====
+[agent]
+[[processors.override]]
+    name_prefix = "srini."
+[[inputs.mem]]
+     fieldpass = ["used_percent", "available_percent", "swap_free", "swap_total", "total", "used", "free"]
+[[outputs.socket_writer]]
+     address = "tcp://riemannIP:port"
+     data_format = "influx"
+[[outputs.file]]
+      files = ["stdout"]
+      data_format = "influx"
+      
+ 
+ Desired Output
+ =======
+ > srini.mem,host=777f7316-366e-469f-b064-3351c9935fdf available_percent=88.64148075970736,free=3271401472i,swap_free=3998478336i,swap_total=4085248000i,total=4085932032i,used=154112000i,used_percent=3.7717710131503237 1601014439000000000
+ 
+ 
+ Default Output
+ =====
+ > srini.mem,host=777f7316-366e-469f-b064-3351c9935fdf active=497541120i,available=3620384768i,available_percent=88.60609377850757,buffered=248774656i,cached=411406336i,commit_limit=6128214016i,committed_as=1199202304i,dirty=45056i,free=3271401472i,high_free=0i,high_total=0i,huge_page_size=2097152i,huge_pages_free=0i,huge_pages_total=0i,inactive=209272832i,low_free=0i,low_total=0i,mapped=100470784i,page_tables=3178496i,shared=110567424i,slab=72417280i,sreclaimable=44449792i,sunreclaim=27967488i,swap_cached=290816i,swap_free=3998478336i,swap_total=4085248000i,total=4085932032i,used=154349568i,used_percent=3.7775853046789005,vmalloc_chunk=0i,vmalloc_total=35184372087808i,vmalloc_used=0i,write_back=0i,write_back_tmp=0i 1601014259000000000
+ 
+ 

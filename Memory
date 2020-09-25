@@ -34,8 +34,7 @@ used
 used_percent
 vmalloc_chunk 
 vmalloc_total 
-vmalloc_used 
-wired 
+vmalloc_used  
 write_back
 write_back_tmp
 
@@ -106,8 +105,6 @@ vmalloc_chunk : Largest contiguous block of free vmalloc area
 vmalloc_total : Total size of the vmalloc memory area.
 
 vmalloc_used : Amount of vmalloc area used. Since Linux 4.4, this field is no longer calculated, it’s hard-coded.
-
-wired : Memory in use by the kernel, which includes the networking stack 
 
 write_back : Memory actively being written back to the disk
 

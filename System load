@@ -19,3 +19,26 @@ n_cpus : numbre of CPU's configured
 n_users : number of users logged in
 uptime : uptime in integer and seconds (eg : 771222)
 uptime_format : uptime in the string format (eg: 8 days, 22:13 )
+
+
+
+config.toml file look like below
+======
+
+[agent]
+[[processors.override]]
+    name_prefix = "srini."
+[[inputs.system]]
+        fieldpass = ["load1", "load5", "load15", "n_cpus"]
+        taginclude = ["deployment", "instance", "instance_index", "az"]
+[[outputs.socket_writer]]
+        address = "tcp://riemannIP:port"
+        data_format = "influx"
+[[outputs.file]]
+        files = ["stdout"]
+        data_format = "influx"
+        
+        
+ Output
+ ==== 
+srini.system load1=0,load15=0,load5=0,n_cpus=2i 1601008668000000000

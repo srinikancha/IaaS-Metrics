@@ -15,3 +15,8 @@ tcp_syn_recv
 tcp_syn_sent
 tcp_time_wait
 udp_socket   
+
+
+Default Output
+=======
+> srini.netstat,tcp_close=0i,tcp_close_wait=0i,tcp_closing=0i,tcp_established=11i,tcp_fin_wait1=0i,tcp_fin_wait2=0i,tcp_last_ack=0i,tcp_listen=5i,tcp_none=6i,tcp_syn_recv=0i,tcp_syn_sent=0i,tcp_time_wait=2i,udp_socket=8i 1601009608000000000

@@ -72,3 +72,35 @@ usage_steal : Percentage of time spent in involuntary wait by the virtual CPU or
 usage_guest :  Percentage of time spent by the CPU or CPUs to run a virtual processor. 
 
 usage_guest_nice : Percentage of time spent by the CPU or CPUs to run a virtual processor with nice priority
+
+
+config.toml looks like below
+========
+[agent]
+  [[processors.override]]
+    name_prefix = "srini."
+[[inputs.cpu]]
+     percpu = true
+     totalcpu = true
+     collect_cpu_time = false
+     report_active = true
+     fieldpass = ["usage_user", "usage_system", "usage_iowait", "usage_steal", "usage_active"]
+     taginclude = ["deployment", "instance", "instance_index", "az", "cpu"]
+  [[outputs.socket_writer]]
+     address = "tcp://10.0.67.6:8094"
+     data_format = "influx"
+  [[outputs.file]]
+     files = ["stdout"]
+     data_format = "influx"
+     
+ Desired Output
+ =====
+> srini.cpu,cpu=cpu0 usage_active=0,usage_iowait=0,usage_steal=0,usage_system=0,usage_user=0 1601015187000000000
+> srini.cpu,cpu=cpu1 usage_active=1.999999979045242,usage_iowait=0,usage_steal=0,usage_system=0,usage_user=2.0000000004638423 1601015187000000000
+> srini.cpu,cpu=cpu-total usage_active=0,usage_iowait=0,usage_steal=0,usage_system=0,usage_user=0 1601015187000000000
+ 
+ Default Output
+ ======
+> srini.cpu,cpu=cpu0,host=777f7316-366e-469f-b064-3351c9935fdf usage_guest=0,usage_guest_nice=0,usage_idle=100,usage_iowait=0,usage_irq=0,usage_nice=0,usage_softirq=0,usage_steal=0,usage_system=0,usage_user=0 1601015262000000000
+> srini.cpu,cpu=cpu1,host=777f7316-366e-469f-b064-3351c9935fdf usage_guest=0,usage_guest_nice=0,usage_idle=100,usage_iowait=0,usage_irq=0,usage_nice=0,usage_softirq=0,usage_steal=0,usage_system=0,usage_user=0 1601015262000000000
+> srini.cpu,cpu=cpu-total,host=777f7316-366e-469f-b064-3351c9935fdf usage_guest=0,usage_guest_nice=0,usage_idle=100,usage_iowait=0,usage_irq=0,usage_nice=0,usage_softirq=0,usage_steal=0,usage_system=0,usage_user=0 1601015262000000000     
